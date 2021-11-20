@@ -6,18 +6,28 @@
 	<div class="container mx-auto flex p-5 items-center">
 		<a href="/" class="flex title-font font-medium items-center text-gray-900 md:mb-0">
 			<svg
-				xmlns="http://www.w3.org/2000/svg"
+				width="59"
+				height="48"
+				viewBox="0 0 59 48"
 				fill="none"
-				stroke="currentColor"
-				stroke-linecap="round"
-				stroke-linejoin="round"
-				stroke-width="2"
-				class="w-10 h-10 text-white p-2 bg-green-500 rounded-full"
-				viewBox="0 0 24 24"
+				xmlns="http://www.w3.org/2000/svg"
 			>
-				<path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+				<g clip-path="url(#clip0_2_2)">
+					<rect width="58.7943" height="48" fill="white" />
+					<path
+						fill-rule="evenodd"
+						clip-rule="evenodd"
+						d="M0.0326485 0C0.0371112 0 0.0415265 0.000914895 0.0456217 0.00268818L26.0997 11.2844V48L3.46186 38.1975C1.36028 37.2875 0 35.2162 0 32.926V0.0326492C0 0.0146179 0.0146172 0 0.0326485 0ZM32.7239 48L55.3617 38.1975C57.4633 37.2875 58.8236 35.2162 58.8236 32.926V0.0326507C58.8236 0.0146182 58.809 0 58.791 0C58.7865 0 58.7821 0.000915535 58.778 0.00268894L32.7239 11.2844V48Z"
+						fill="#10B981"
+					/>
+				</g>
+				<defs>
+					<clipPath id="clip0_2_2">
+						<rect width="58.7943" height="48" fill="white" />
+					</clipPath>
+				</defs>
 			</svg>
-			<span class="ml-3 text-xl">qukbuk</span>
+			<span class="ml-6 text-2xl font-black text-gray-700">qukbuk</span>
 		</a>
 		{#if $page.path === '/'}
 			<a
