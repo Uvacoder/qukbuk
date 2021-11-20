@@ -1,3 +1,20 @@
+<script>
+	import { auth } from '$lib/supabase';
+	import { goto } from '$app/navigation';
+
+	let name, email, password, errorMessage;
+
+	const handleSignUp = () => {
+		auth.signUp(email, password, name).then((error) => {
+			if (error) {
+				errorMessage = error.message;
+				return;
+			}
+			goto('/dashboard');
+		});
+	};
+</script>
+
 <section class="text-gray-600 body-font">
 	<div class="container px-5 py-24 mx-auto flex flex-wrap items-center">
 		<div class="lg:w-3/5 md:w-1/2 md:pr-16 lg:pr-0 pr-0">
@@ -13,6 +30,7 @@
 			<div class="relative mb-4">
 				<label for="full-name" class="leading-7 text-sm text-gray-600">Full Name</label>
 				<input
+					bind:value={name}
 					type="text"
 					id="full-name"
 					name="full-name"
@@ -22,6 +40,7 @@
 			<div class="relative mb-4">
 				<label for="email" class="leading-7 text-sm text-gray-600">Email</label>
 				<input
+					bind:value={email}
 					type="email"
 					id="email"
 					name="email"
@@ -31,6 +50,7 @@
 			<div class="relative mb-4">
 				<label for="password" class="leading-7 text-sm text-gray-600">Password</label>
 				<input
+					bind:value={password}
 					type="password"
 					id="password"
 					name="password"
@@ -38,12 +58,18 @@
 				/>
 			</div>
 			<button
+				on:click={handleSignUp}
 				class="text-white bg-green-500 border-0 py-2 px-8 focus:outline-none hover:bg-green-600 rounded text-lg"
 				>Sign up</button
 			>
 			<p class="text-xs text-gray-500 mt-3">
 				Already have an account? <a href="/sign-in">Sign in!</a>
 			</p>
+			{#if errorMessage}
+				<p class="text-xs text-red-500 mt-6 text-center">
+					{errorMessage}
+				</p>
+			{/if}
 		</div>
 	</div>
 </section>
