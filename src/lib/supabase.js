@@ -83,8 +83,26 @@ const database = (() => {
 		return data;
 	};
 
+	const post = async (url, title, description, image, tags, ingredients, directions) => {
+		const id = get(currentUser).id;
+		const { data, error } = await supabase.from('recipes').insert([
+			{
+				user_id: id,
+				url: url,
+				title: title,
+				image: image,
+				description: description,
+				tags: tags,
+				ingredients: ingredients,
+				directions: directions
+			}
+		]);
+		return data, error;
+	};
+
 	return {
-		fetch
+		fetch,
+		post
 	};
 })();
 
