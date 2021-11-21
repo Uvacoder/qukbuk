@@ -1,4 +1,5 @@
 <script>
+	import { currentUser } from '$lib/store';
 	import { database } from '$lib/supabase';
 	import { onMount } from 'svelte';
 	import RecipeCard from '$lib/components/RecipeCard.svelte';

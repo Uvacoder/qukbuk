@@ -1,12 +1,13 @@
 import { createClient } from '@supabase/supabase-js';
 import { currentSession, currentUser } from '$lib/store';
+import { get } from 'svelte/store';
+
+const supabase = createClient(
+	import.meta.env.VITE_SUPABASE_URL,
+	import.meta.env.VITE_SUPABASE_ANON_KEY
+);
 
 const auth = (() => {
-	const supabase = createClient(
-		import.meta.env.VITE_SUPABASE_URL,
-		import.meta.env.VITE_SUPABASE_ANON_KEY
-	);
-
 	const session = () => {
 		const newSession = supabase.auth.session();
 		auth.save(auth.user(), newSession);
@@ -77,14 +78,8 @@ const auth = (() => {
 })();
 
 const database = (() => {
-	const supabase = createClient(
-		import.meta.env.VITE_SUPABASE_URL,
-		import.meta.env.VITE_SUPABASE_ANON_KEY
-	);
-
 	const fetch = async () => {
-		const { data, error } = await supabase.from('recipes').select();
-
+		const { data, error } = await supabase.from('recipes').select('*');
 		return data;
 	};
 
