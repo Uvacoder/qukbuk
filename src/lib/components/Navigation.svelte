@@ -9,9 +9,9 @@
 	});
 
 	const handleSignOut = () => {
+		goto('/');
 		auth.signOut().then((error) => {
 			if (error) alert(error.message);
-			goto('/');
 		});
 	};
 </script>

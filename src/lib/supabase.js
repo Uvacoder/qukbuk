@@ -1,5 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
-import { currentSession, currentUser } from '$lib/store';
+import { currentSession, currentUser, userRecipes } from '$lib/store';
 import { get } from 'svelte/store';
 
 const supabase = createClient(
@@ -57,6 +57,7 @@ const auth = (() => {
 		const { error } = await supabase.auth.signOut();
 
 		auth.save(null, null);
+		userRecipes.set(null);
 
 		if (error) return error;
 	};
@@ -100,9 +101,16 @@ const database = (() => {
 		return data, error;
 	};
 
+	const remove = async (recipeId) => {
+		const { data, error } = await supabase.from('recipes').delete().eq('id', recipeId);
+
+		return { data, error };
+	};
+
 	return {
 		fetch,
-		post
+		post,
+		remove
 	};
 })();
 
