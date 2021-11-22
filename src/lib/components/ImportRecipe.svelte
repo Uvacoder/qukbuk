@@ -1,4 +1,5 @@
 <script>
+	import Loading from '$lib/components/Loading.svelte';
 	import { database } from '$lib/supabase';
 	import { goto } from '$app/navigation';
 	let url, tags, errorMessage;
@@ -31,8 +32,8 @@
 </script>
 
 {#if loading}
-	<div class="absolute top-0 w-screen h-screen bg-white z-10 grid place-items-center">
-		<p>Loading...</p>
+	<div class="absolute top-0 w-screen h-screen bg-white z-50 grid place-items-center">
+		<Loading />
 	</div>
 {:else}
 	<section class="text-gray-600 body-font w-full md:w-2/3 lg:w-1/2">

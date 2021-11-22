@@ -29,34 +29,38 @@
 						</p>
 					{/each}
 				</div>
-				<h1 class="title-font text-xl font-medium text-gray-900 mb-3">{title}</h1>
+				<h1 class="title-font text-xl font-medium text-gray-900 mb-3 line-clamp-1">{title}</h1>
 				<p class="leading-relaxed mb-3 line-clamp-3">
 					{description}
 				</p>
 			</div>
 
 			<!-- Control Buttons -->
-			<div class="flex items-center justify-between pt-8">
-				<button class="text-red-500 hover:underline" on:click={deleteRecipe}>Delete</button>
-				<div class="flex items-center flex-wrap">
-					<a
-						href={url}
-						class="text-green-500 hover:underline inline-flex items-center md:mb-2 lg:mb-0"
-						>See Recipe
-						<svg
-							class="w-4 h-4 ml-2"
-							viewBox="0 0 24 24"
-							stroke="currentColor"
-							stroke-width="2"
-							fill="none"
+			<div class="flex items-center justify-between pt-2">
+				<button
+					type="button"
+					class="text-red-500 bg-white border border-red-500 hover:bg-red-500 hover:text-white focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center"
+				>
+					<svg
+						class="w-6 h-6"
+						fill="none"
+						stroke="currentColor"
+						viewBox="0 0 24 24"
+						xmlns="http://www.w3.org/2000/svg"
+						><path
 							stroke-linecap="round"
 							stroke-linejoin="round"
-						>
-							<path d="M5 12h14" />
-							<path d="M12 5l7 7-7 7" />
-						</svg>
-					</a>
-				</div>
+							stroke-width="2"
+							d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+						/></svg
+					>
+				</button>
+				<a
+					href={url}
+					type="button"
+					class="text-white bg-green-500 hover:bg-green-800 focus:ring-4 focus:ring-green-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+					>View</a
+				>
 			</div>
 			<!-- End of Control Buttons -->
 		</div>
