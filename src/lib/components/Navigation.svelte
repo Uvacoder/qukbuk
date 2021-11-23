@@ -13,7 +13,7 @@
 </script>
 
 {#if $currentSession}
-	<header class="text-gray-600 body-font z-10">
+	<header class="text-gray-600 body-font z-10 border-b-2">
 		<div class="container mx-auto flex p-5 items-center">
 			<a href="/dashboard" class="flex title-font font-medium items-center text-gray-900 md:mb-0">
 				<svg

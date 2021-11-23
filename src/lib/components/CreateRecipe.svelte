@@ -103,11 +103,23 @@
 						{#each ingredients as ingredient}
 							<li class="px-1 py-2 text-gray-500 flex space-x-2">
 								<button
-									class="w-6 h-6 rounded-full bg-red-400 text-white flex items-center justify-center"
+									class="text-gray-400 hover:text-gray-500"
 									on:click|preventDefault={() => {
 										ingredients = ingredients.filter((i) => i !== ingredient);
-									}}>-</button
+									}}
 								>
+									<svg
+										class="w-6 h-6"
+										fill="currentColor"
+										viewBox="0 0 20 20"
+										xmlns="http://www.w3.org/2000/svg"
+										><path
+											fill-rule="evenodd"
+											d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 000 2h6a1 1 0 100-2H7z"
+											clip-rule="evenodd"
+										/></svg
+									>
+								</button>
 								<p>{ingredient}</p>
 							</li>
 						{/each}
@@ -121,10 +133,22 @@
 							class="w-full bg-white rounded border border-gray-300 focus:border-green-500 focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
 						/>
 						<button
+							class="text-gray-400 hover:text-gray-500"
 							type="submit"
-							class="text-green-500 border-2 border-green-500 hover:bg-green-100 py-2 px-4 focus:outline-none rounded text-lg"
-							on:click|preventDefault={addIngredient}>+</button
+							on:click|preventDefault={addIngredient}
 						>
+							<svg
+								class="w-8 h-8"
+								fill="currentColor"
+								viewBox="0 0 20 20"
+								xmlns="http://www.w3.org/2000/svg"
+								><path
+									fill-rule="evenodd"
+									d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z"
+									clip-rule="evenodd"
+								/></svg
+							>
+						</button>
 					</form>
 				</div>
 				<div class="relative mb-4">
@@ -135,11 +159,23 @@
 						{#each directions as direction}
 							<li class="px-1 py-2 text-gray-500 flex space-x-2">
 								<button
-									class="w-6 h-6 rounded-full bg-red-400 text-white flex items-center justify-center"
+									class="text-gray-400 hover:text-gray-500"
 									on:click|preventDefault={() => {
 										directions = directions.filter((i) => i !== direction);
-									}}>-</button
+									}}
 								>
+									<svg
+										class="w-6 h-6"
+										fill="currentColor"
+										viewBox="0 0 20 20"
+										xmlns="http://www.w3.org/2000/svg"
+										><path
+											fill-rule="evenodd"
+											d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 000 2h6a1 1 0 100-2H7z"
+											clip-rule="evenodd"
+										/></svg
+									>
+								</button>
 								<p>{direction}</p>
 							</li>
 						{/each}
@@ -153,10 +189,22 @@
 							class="w-full bg-white rounded border border-gray-300 focus:border-green-500 focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
 						/>
 						<button
+							class="text-gray-400 hover:text-gray-500"
 							type="submit"
-							class="text-green-500 border-2 border-green-500 hover:bg-green-100 py-2 px-4 focus:outline-none rounded text-lg"
-							on:click|preventDefault={addDirection}>+</button
+							on:click|preventDefault={addDirection}
 						>
+							<svg
+								class="w-8 h-8"
+								fill="currentColor"
+								viewBox="0 0 20 20"
+								xmlns="http://www.w3.org/2000/svg"
+								><path
+									fill-rule="evenodd"
+									d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z"
+									clip-rule="evenodd"
+								/></svg
+							>
+						</button>
 					</form>
 				</div>
 				<button

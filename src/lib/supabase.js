@@ -84,6 +84,12 @@ const database = (() => {
 		return data;
 	};
 
+	const fetchTags = async (searchTag) => {
+		const { data, error } = await supabase.from('recipes').select('*').cs('tags', [searchTag]);
+		if (error) return error;
+		return data;
+	};
+
 	const post = async (url, title, description, image, tags, ingredients, directions) => {
 		const id = get(currentUser).id;
 		const { data, error } = await supabase.from('recipes').insert([
@@ -109,6 +115,7 @@ const database = (() => {
 
 	return {
 		fetch,
+		fetchTags,
 		post,
 		remove
 	};
