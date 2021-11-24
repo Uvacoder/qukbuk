@@ -24,10 +24,10 @@
 				tags.split(', ')
 			);
 			goto('/dashboard');
+			loading = false;
 		} catch (error) {
 			errorMessage = error;
 		}
-		loading = false;
 	};
 </script>
 

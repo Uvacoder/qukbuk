@@ -1,5 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
-import { currentSession, currentUser, userRecipes } from '$lib/store';
+import { currentSession, currentUser, userRecipes, filteredBy, totalRecipeCount } from '$lib/store';
 import { get } from 'svelte/store';
 
 const supabase = createClient(
@@ -79,14 +79,26 @@ const auth = (() => {
 })();
 
 const database = (() => {
-	const fetch = async () => {
-		const { data, error } = await supabase.from('recipes').select('*');
+	const fetch = async (amountToLoad) => {
+		let addMore = amountToLoad + 5;
+		const { data, error, count } = await supabase
+			.from('recipes')
+			.select('*', { count: 'exact' })
+			.range(amountToLoad, addMore);
+		totalRecipeCount.set(count);
 		return data;
 	};
 
-	const fetchTags = async (searchTag) => {
-		const { data, error } = await supabase.from('recipes').select('*').cs('tags', [searchTag]);
+	const fetchTags = async (searchTag, amountToLoad) => {
+		filteredBy.set(searchTag);
+		let addMore = amountToLoad + 5;
+		const { data, error, count } = await supabase
+			.from('recipes')
+			.select('*', { count: 'exact' })
+			.cs('tags', [searchTag])
+			.range(amountToLoad, addMore);
 		if (error) return error;
+		totalRecipeCount.set(count);
 		return data;
 	};
 

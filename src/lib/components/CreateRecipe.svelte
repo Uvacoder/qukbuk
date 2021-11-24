@@ -12,10 +12,10 @@
 		try {
 			await database.post('', title, description, image, tags.split(', '), ingredients, directions);
 			goto('/dashboard');
+			loading = false;
 		} catch (error) {
 			errorMessage = error;
 		}
-		loading = false;
 	};
 
 	let newIngredient = '';
@@ -133,6 +133,7 @@
 							class="w-full bg-white rounded border border-gray-300 focus:border-green-500 focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
 						/>
 						<button
+							disabled={!newIngredient}
 							class="text-gray-400 hover:text-gray-500"
 							type="submit"
 							on:click|preventDefault={addIngredient}
@@ -189,6 +190,7 @@
 							class="w-full bg-white rounded border border-gray-300 focus:border-green-500 focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
 						/>
 						<button
+							disabled={!newDirection}
 							class="text-gray-400 hover:text-gray-500"
 							type="submit"
 							on:click|preventDefault={addDirection}

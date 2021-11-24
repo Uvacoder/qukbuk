@@ -24,7 +24,7 @@
 			</p>
 		</div>
 		<form
-			on:submit|preventDefault={handleSignIn}
+			on:submit|preventDefault={handleSignUp}
 			class="lg:w-2/6 md:w-1/2 bg-gray-100 rounded-lg p-8 flex flex-col md:ml-auto w-full mt-10 md:mt-0"
 		>
 			<h2 class="text-gray-900 text-lg font-medium title-font mb-5">Sign Up</h2>
