@@ -16,8 +16,11 @@
 </script>
 
 <section class="text-gray-600 body-font">
-	<div class="container px-5 py-24 mx-auto grid place-items-center">
-		<div class="lg:w-2/6 md:w-1/2 bg-gray-100 rounded-lg p-8 flex flex-col w-full mt-10 md:mt-0">
+	<div class="container px-5 py-8 mx-auto grid place-items-center">
+		<form
+			on:submit|preventDefault={handleSignIn}
+			class="lg:w-2/6 md:w-1/2 bg-gray-100 rounded-lg p-8 flex flex-col w-full mt-10 md:mt-0"
+		>
 			<h2 class="text-gray-900 text-lg font-medium title-font mb-5">Sign in</h2>
 			<div class="relative mb-4">
 				<label for="email" class="leading-7 text-sm text-gray-600">Email</label>
@@ -40,7 +43,7 @@
 				/>
 			</div>
 			<button
-				on:click={handleSignIn}
+				type="submit"
 				class="text-white bg-green-500 border-0 py-2 px-8 focus:outline-none hover:bg-green-600 rounded text-lg"
 				>Sign in</button
 			>
@@ -52,6 +55,6 @@
 					{errorMessage}
 				</p>
 			{/if}
-		</div>
+		</form>
 	</div>
 </section>

@@ -14,11 +14,11 @@
 </script>
 
 <div class="p-4 md:w-1/3">
-	<div
-		class="h-full border-2 border-gray-200 border-opacity-60 flex flex-col rounded-lg overflow-hidden"
-	>
+	<div class="h-full flex flex-col rounded-t-lg overflow-hidden">
 		<img class="lg:h-48 md:h-36 w-full object-cover object-center" src={image} alt={title} />
-		<div class="p-6 flex-grow flex flex-col justify-between">
+		<div
+			class="border border-gray-200 border-opacity-60 p-6 flex-grow flex flex-col justify-between"
+		>
 			<div>
 				<div class="w-full flex flex-wrap space-x-2 mb-2">
 					{#each tags as tag}

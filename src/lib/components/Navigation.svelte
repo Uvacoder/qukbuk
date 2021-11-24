@@ -4,6 +4,8 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 
+	let w;
+
 	const handleSignOut = () => {
 		goto('/');
 		auth.signOut().then((error) => {
@@ -13,7 +15,7 @@
 </script>
 
 {#if $currentSession}
-	<header class="text-gray-600 body-font z-10 border-b-2">
+	<header bind:clientWidth={w} class="text-gray-600 body-font z-10 border-b-2">
 		<div class="container mx-auto flex p-5 items-center">
 			<a href="/dashboard" class="flex title-font font-medium items-center text-gray-900 md:mb-0">
 				<svg
@@ -43,32 +45,52 @@
 			</a>
 			<!-- Options dropdown  -->
 			<div class="ml-auto relative inline-block text-left">
-				<div on:click={() => ($optionsHidden = !$optionsHidden)}>
-					<button
-						type="button"
-						class="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-green-200"
-						id="menu-button"
-						aria-expanded="true"
-						aria-haspopup="true"
+				<div class="flex items-center">
+					<a
+						href="/dashboard/add-recipe"
+						class="inline-flex justify-center rounded-l-md bg-yellow-200 px-2 md:px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-yellow-400"
 					>
-						{#if $currentUser}
-							{$currentUser.user_metadata.name}
-						{/if}
-						<!-- Heroicon name: solid/chevron-down -->
 						<svg
-							class="-mr-1 ml-2 h-5 w-5"
+							class="w-5 h-5"
+							fill="none"
+							stroke="currentColor"
+							viewBox="0 0 24 24"
 							xmlns="http://www.w3.org/2000/svg"
-							viewBox="0 0 20 20"
-							fill="currentColor"
-							aria-hidden="true"
+							><path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+							/></svg
 						>
-							<path
-								fill-rule="evenodd"
-								d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-								clip-rule="evenodd"
-							/>
-						</svg>
-					</button>
+					</a>
+					<div on:click={() => ($optionsHidden = !$optionsHidden)}>
+						<button
+							type="button"
+							class="inline-flex items-center w-full rounded-r-md bg-gray-100 px-2 md:px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-200"
+							id="menu-button"
+							aria-expanded="true"
+							aria-haspopup="true"
+						>
+							{#if $currentUser && w >= 768}
+								{$currentUser.user_metadata.name}
+							{/if}
+							<!-- Heroicon name: solid/chevron-down -->
+							<svg
+								class="md:-mr-1 md:ml-2 h-5 w-5"
+								xmlns="http://www.w3.org/2000/svg"
+								viewBox="0 0 20 20"
+								fill="currentColor"
+								aria-hidden="true"
+							>
+								<path
+									fill-rule="evenodd"
+									d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+									clip-rule="evenodd"
+								/>
+							</svg>
+						</button>
+					</div>
 				</div>
 
 				<!--
@@ -92,13 +114,22 @@
 				>
 					<div class="py-1" role="none">
 						<!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
-						<a
-							href="/dashboard/add-recipe"
-							class="hover:bg-gray-50 text-gray-700 block px-4 py-2 text-sm"
-							role="menuitem"
-							tabindex="-1"
-							id="menu-item-0">New recipe</a
-						>
+						{#if w >= 768}
+							<a
+								href="/dashboard/add-recipe"
+								class="hover:bg-gray-50 text-gray-700 block px-4 py-2 text-sm"
+								role="menuitem"
+								tabindex="-1"
+								id="menu-item-0">New recipe</a
+							>
+						{:else if $currentUser && w <= 768}
+							<a
+								class="hover:bg-gray-50 text-gray-700 block px-4 py-2 text-sm"
+								role="menuitem"
+								tabindex="-1"
+								id="menu-item-0">{$currentUser.user_metadata.name}</a
+							>
+						{/if}
 						<hr />
 						<a
 							href="/dashboard/settings"

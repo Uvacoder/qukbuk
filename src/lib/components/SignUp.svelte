@@ -16,14 +16,15 @@
 </script>
 
 <section class="text-gray-600 body-font">
-	<div class="container px-5 py-24 mx-auto flex flex-wrap items-center">
+	<div class="container px-5 py-8 mx-auto flex flex-wrap items-center">
 		<div class="lg:w-3/5 md:w-1/2 md:pr-16 lg:pr-0 pr-0">
 			<h1 class="title-font font-medium text-3xl text-gray-900">Never lose a recipe again.</h1>
 			<p class="leading-relaxed mt-4">
 				qukbuk saves all your recipes for you while you keep on cooking.
 			</p>
 		</div>
-		<div
+		<form
+			on:submit|preventDefault={handleSignIn}
 			class="lg:w-2/6 md:w-1/2 bg-gray-100 rounded-lg p-8 flex flex-col md:ml-auto w-full mt-10 md:mt-0"
 		>
 			<h2 class="text-gray-900 text-lg font-medium title-font mb-5">Sign Up</h2>
@@ -58,7 +59,7 @@
 				/>
 			</div>
 			<button
-				on:click={handleSignUp}
+				type="submit"
 				class="text-white bg-green-500 border-0 py-2 px-8 focus:outline-none hover:bg-green-600 rounded text-lg"
 				>Sign up</button
 			>
@@ -70,6 +71,6 @@
 					{errorMessage}
 				</p>
 			{/if}
-		</div>
+		</form>
 	</div>
 </section>
