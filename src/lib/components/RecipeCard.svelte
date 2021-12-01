@@ -1,7 +1,7 @@
 <script>
 	import { userRecipes } from '$lib/store';
 	import { database } from '$lib/supabase';
-	export let title, description, image, tags, url, id;
+	export let title, description, image, tags, url, id, own;
 
 	const deleteRecipe = async () => {
 		try {
@@ -15,9 +15,9 @@
 
 <div class="p-4 md:w-1/3">
 	<div class="h-full flex flex-col rounded-t-lg overflow-hidden">
-		<img class="lg:h-48 md:h-36 w-full object-cover object-center" src={image} alt={title} />
+		<img class="h-36 lg:h-48 md:h-36 w-full object-cover object-center" src={image} alt={title} />
 		<div
-			class="border border-gray-200 border-opacity-60 p-6 flex-grow flex flex-col justify-between"
+			class="bg-gray-50 border border-gray-200 border-opacity-60 p-6 flex-grow flex flex-col justify-between"
 		>
 			<div>
 				<div class="w-full flex flex-wrap space-x-2 mb-2">
@@ -55,7 +55,7 @@
 					>
 				</button>
 				<a
-					href={url}
+					href={own ? `/dashboard/recipe/${title.replace(/ /g, '-').toLowerCase()}?id=${id}` : url}
 					type="button"
 					class="text-white bg-green-500 hover:bg-green-800 focus:ring-4 focus:ring-green-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
 					>View</a

@@ -20,8 +20,9 @@
 				description,
 				image,
 				tags.split(', '),
-				tags.split(', '),
-				tags.split(', ')
+				null,
+				null,
+				false,
 			);
 			goto('/dashboard');
 			loading = false;

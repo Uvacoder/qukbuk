@@ -102,7 +102,12 @@ const database = (() => {
 		return data;
 	};
 
-	const post = async (url, title, description, image, tags, ingredients, directions) => {
+	const fetchPost = async (id) => {
+		const { data, error } = await supabase.from('recipes').select('*').eq('id', id);
+		return data;
+	};
+
+	const post = async (url, title, description, image, tags, ingredients, directions, own) => {
 		const id = get(currentUser).id;
 		const { data, error } = await supabase.from('recipes').insert([
 			{
@@ -113,7 +118,8 @@ const database = (() => {
 				description: description,
 				tags: tags,
 				ingredients: ingredients,
-				directions: directions
+				directions: directions,
+				own: own
 			}
 		]);
 		return data, error;
@@ -128,6 +134,7 @@ const database = (() => {
 	return {
 		fetch,
 		fetchTags,
+		fetchPost,
 		post,
 		remove
 	};

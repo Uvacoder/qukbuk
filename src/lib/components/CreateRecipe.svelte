@@ -10,7 +10,7 @@
 	const createRecipe = async () => {
 		loading = true;
 		try {
-			await database.post('', title, description, image, tags.split(', '), ingredients, directions);
+			await database.post('', title, description, image, tags.split(', '), ingredients, directions, true);
 			goto('/dashboard');
 			loading = false;
 		} catch (error) {

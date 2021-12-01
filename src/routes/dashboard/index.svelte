@@ -42,7 +42,7 @@
 		</section>
 	{:else}
 		<section
-			class="text-gray-600 body-font"
+			class="text-gray-600 body-font md:w-full"
 			on:click={() => {
 				if ($optionsHidden === false) {
 					$optionsHidden = !$optionsHidden;
@@ -51,9 +51,9 @@
 		>
 			<div class="container px-5 pt-8 pb-12 mx-auto">
 				<FilterByTag />
-				<div class="flex flex-wrap -m-4">
-					{#each $userRecipes as { id, url, image, title, description, tags } (id)}
-						<RecipeCard {title} {description} {tags} {image} {url} {id} />
+				<div class="flex flex-wrap -m-4 md:w-full">
+					{#each $userRecipes as { id, url, image, title, description, tags, own } (id)}
+						<RecipeCard {title} {description} {tags} {image} {url} {id} {own} />
 					{/each}
 				</div>
 			</div>
