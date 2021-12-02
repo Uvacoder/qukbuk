@@ -84,7 +84,8 @@ const database = (() => {
 		const { data, error, count } = await supabase
 			.from('recipes')
 			.select('*', { count: 'exact' })
-			.range(amountToLoad, addMore);
+			.range(amountToLoad, addMore)
+			.order('created_at', { ascending: false });
 		totalRecipeCount.set(count);
 		return data;
 	};
@@ -96,7 +97,8 @@ const database = (() => {
 			.from('recipes')
 			.select('*', { count: 'exact' })
 			.cs('tags', [searchTag])
-			.range(amountToLoad, addMore);
+			.range(amountToLoad, addMore)
+			.order('created_at', { ascending: false });
 		if (error) return error;
 		totalRecipeCount.set(count);
 		return data;

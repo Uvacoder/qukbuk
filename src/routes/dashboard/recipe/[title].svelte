@@ -17,7 +17,9 @@ onMount(async () => {
 </script>
 
 {#if loading}
+<section class="absolute top-0 w-screen h-screen grid place-items-center">
   <Loading />
+</section>
 {:else}
   <article class="container max-w-screen-md px-5 pt-4 md:pt-8 pb-12 mx-auto flex flex-col">
     <img class='max-w-full' src={recipe.image} alt='Photo of the final result'>

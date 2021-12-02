@@ -51,7 +51,7 @@
 		>
 			<div class="container px-5 pt-8 pb-12 mx-auto">
 				<FilterByTag />
-				<div class="flex flex-wrap -m-4 md:w-full">
+				<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:w-full">
 					{#each $userRecipes as { id, url, image, title, description, tags, own } (id)}
 						<RecipeCard {title} {description} {tags} {image} {url} {id} {own} />
 					{/each}
