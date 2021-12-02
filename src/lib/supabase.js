@@ -18,12 +18,6 @@ const auth = (() => {
 		return newUser;
 	};
 
-	const stateChange = (event, session) => {
-		supabase.auth.onAuthStateChange((event, session) => {
-			console.log(event, session);
-		});
-	};
-
 	const signUp = async (email, password, name) => {
 		const { user, session, error } = await supabase.auth.signUp(
 			{
@@ -67,14 +61,43 @@ const auth = (() => {
 		currentSession.set(newSession);
 	};
 
+	const updateName = async (newName) => {
+		const { user, error } = await supabase.auth.update({ data: { name: newName } });
+		if (error) {
+			return { user, error };
+		}
+		currentUser.set(user);
+		return { user, error };
+	};
+
+	const updateEmail = async (newEmail) => {
+		const { user, error } = await supabase.auth.update({ email: newEmail });
+		if (error) {
+			return { user, error };
+		}
+		currentUser.set(user);
+		return { user, error };
+	};
+
+	const updatePassword = async (newPassword) => {
+		const { user, error } = await supabase.auth.update({ password: newPassword });
+		if (error) {
+			return { user, error };
+		}
+		currentUser.set(user);
+		return { user, error };
+	};
+
 	return {
 		user,
 		session,
-		stateChange,
 		signUp,
 		signIn,
 		signOut,
-		save
+		save,
+		updateName,
+		updateEmail,
+		updatePassword
 	};
 })();
 
