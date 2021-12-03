@@ -5,7 +5,7 @@
 	import SignUp from '$lib/components/SignUp.svelte';
 </script>
 
-<div class="h-full flex flex-col justify-between">
+<div class="h-full flex flex-col justify-between font-qukbuk">
 	<Navigation />
 	<slot />
 	<Footer />
