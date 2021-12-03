@@ -2,21 +2,10 @@
 	import Loading from '$lib/components/Loading.svelte';
 	import { database } from '$lib/supabase';
 	import { goto } from '$app/navigation';
-
-	let title, description, tags, image, errorMessage;
+	import { createForm } from 'svelte-forms-lib';
+	import * as yup from 'yup';
 
 	let loading = false;
-
-	const createRecipe = async () => {
-		loading = true;
-		try {
-			await database.post('', title, description, image, tags.split(', '), ingredients, directions, true);
-			goto('/dashboard');
-			loading = false;
-		} catch (error) {
-			errorMessage = error;
-		}
-	};
 
 	let newIngredient = '';
 	let ingredients = [];
@@ -33,6 +22,45 @@
 		directions = [...directions, newDirection];
 		newDirection = '';
 	};
+
+	const { form, errors, state, handleChange, handleSubmit } = createForm({
+		initialValues: {
+			image: '',
+			title: '',
+			description: '',
+			tags: ''
+		},
+		validationSchema: yup.object().shape({
+			image: yup.string().url(),
+			title: yup.string().min(6).max(64).required(),
+			description: yup.string().min(6).max(280).required(),
+			tags: yup
+				.string()
+				.min(3)
+				.max(64)
+				.matches(/^[a-z]+(, [a-z]+)*$/, 'must be a list of one or more comma separated words')
+				.required()
+		}),
+		onSubmit: async ({ image, title, description, tags }) => {
+			loading = true;
+			try {
+				await database.post(
+					null,
+					title,
+					description,
+					image,
+					tags.split(', '),
+					ingredients,
+					directions,
+					true
+				);
+				goto('/dashboard');
+				loading = false;
+			} catch (error) {
+				$errors.fail = error.message;
+			}
+		}
+	});
 </script>
 
 {#if loading}
@@ -42,7 +70,10 @@
 {:else}
 	<section class="text-gray-600 body-font w-full md:w-2/3 lg:w-1/2 mb-12">
 		<div class="container mx-auto grid place-items-center">
-			<form class="w-full bg-gray-100 rounded-b-lg py-12 px-4 md:px-8 flex flex-col">
+			<form
+				on:submit|preventDefault={handleSubmit}
+				class="w-full bg-gray-100 rounded-b-lg py-12 px-4 md:px-8 flex flex-col"
+			>
 				<div class="relative mb-4">
 					<label
 						for="image"
@@ -51,12 +82,16 @@
 					>
 					<input
 						placeholder="wwww.link.to/your-image"
-						bind:value={image}
-						type="input"
+						bind:value={$form.image}
+						on:blur={handleChange}
+						on:change={handleChange}
 						id="image"
 						name="image"
 						class="w-full bg-white rounded border border-gray-300 focus:border-green-500 focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
 					/>
+					{#if $errors.image}
+						<small class="text-xs text-red-500 mt-6 text-center">{$errors.image}</small>
+					{/if}
 				</div>
 				<div class="relative mb-4">
 					<label
@@ -64,36 +99,49 @@
 						class="leading-7 text-sm md:text-lg block mb-4 text-gray-600 block mb-4">Title</label
 					>
 					<input
-						bind:value={title}
-						type="text"
+						bind:value={$form.title}
+						on:blur={handleChange}
+						on:change={handleChange}
 						id="title"
 						name="title"
 						class="w-full bg-white rounded border border-gray-300 focus:border-green-500 focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
 					/>
+					{#if $errors.title}
+						<small class="text-xs text-red-500 mt-6 text-center">{$errors.title}</small>
+					{/if}
 				</div>
 				<div class="relative mb-4">
 					<label for="description" class="leading-7 text-sm md:text-lg block mb-4 text-gray-600"
 						>Description</label
 					>
-					<input
-						bind:value={description}
-						type="text"
+					<textarea
+						bind:value={$form.description}
+						on:blur={handleChange}
+						on:change={handleChange}
+						type=""
 						id="description"
 						name="description"
 						class="w-full bg-white rounded border border-gray-300 focus:border-green-500 focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
 					/>
+					{#if $errors.description}
+						<small class="text-xs text-red-500 mt-6 text-center">{$errors.description}</small>
+					{/if}
 				</div>
 				<div class="relative mb-4">
 					<label for="tags" class="leading-7 text-sm md:text-lg block mb-4 text-gray-600"
 						>Tags</label
 					>
 					<input
-						bind:value={tags}
-						type="text"
+						bind:value={$form.tags}
+						on:blur={handleChange}
+						on:change={handleChange}
 						id="tags"
 						name="tags"
 						class="w-full bg-white rounded border border-gray-300 focus:border-green-500 focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
 					/>
+					{#if $errors.tags}
+						<small class="text-xs text-red-500 mt-6 text-center">{$errors.tags}</small>
+					{/if}
 				</div>
 				<div class="relative mb-4">
 					<label for="ingredients" class="leading-7 text-sm md:text-lg text-gray-600"
@@ -210,14 +258,14 @@
 					</form>
 				</div>
 				<button
-					on:click|preventDefault={createRecipe}
+					disabled={$errors.title || $errors.description || $errors.tags}
 					type="submit"
-					class="text-white bg-green-500 border-0 py-2 px-8 focus:outline-none hover:bg-green-600 rounded text-lg"
+					class="disabled:opacity-50 disabled:cursor-default text-white bg-green-500 border-0 py-2 px-8 focus:outline-none hover:bg-green-600 rounded text-lg"
 					>Add Recipe</button
 				>
-				{#if errorMessage}
+				{#if $errors.fail}
 					<p class="text-xs text-red-500 mt-6 text-center">
-						{errorMessage}
+						{$errors.fail}
 					</p>
 				{/if}
 			</form>
