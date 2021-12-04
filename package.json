@@ -28,6 +28,6 @@
 		"@tailwindcss/line-clamp": "^0.2.2",
 		"svelte-forms-lib": "^2.0.0",
 		"yup": "^0.32.11",
-		"encoding"
+		"encoding": ""
 	}
 }
