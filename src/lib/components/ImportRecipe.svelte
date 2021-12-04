@@ -25,7 +25,7 @@
 			loading = true;
 			try {
 				const response = await fetch(
-					`http://api.linkpreview.net/?key=${import.meta.env.VITE_LINK_API_KEY}&q=${url}`,
+					`https://api.linkpreview.net/?key=${import.meta.env.VITE_LINK_API_KEY}&q=${url}`,
 					{ mode: 'cors' }
 				).then();
 				const { title, description, image } = await response.json();
