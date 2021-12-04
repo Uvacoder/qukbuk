@@ -54,11 +54,10 @@
 					directions,
 					true
 				);
-				goto('/dashboard');
-				loading = false;
 			} catch (error) {
 				$errors.fail = error.message;
 			}
+			goto('/dashboard');
 		}
 	});
 </script>
@@ -75,9 +74,7 @@
 				class="w-full bg-gray-100 rounded-b-lg py-12 px-4 md:px-8 flex flex-col"
 			>
 				<div class="relative mb-4">
-					<label
-						for="image"
-						class="leading-7 text-sm md:text-lg block mb-4 text-gray-600 block mb-4"
+					<label for="image" class="leading-7 text-sm md:text-lg block mb-4 text-gray-600"
 						>Image Source</label
 					>
 					<input
@@ -94,9 +91,8 @@
 					{/if}
 				</div>
 				<div class="relative mb-4">
-					<label
-						for="title"
-						class="leading-7 text-sm md:text-lg block mb-4 text-gray-600 block mb-4">Title</label
+					<label for="title" class="leading-7 text-sm md:text-lg block mb-4 text-gray-600"
+						>Title</label
 					>
 					<input
 						bind:value={$form.title}

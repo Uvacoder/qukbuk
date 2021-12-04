@@ -20,7 +20,7 @@
 	</section>
 {:else}
 	<article class="container max-w-screen-md px-5 pt-4 md:pt-8 pb-12 mx-auto flex flex-col">
-		<img class="max-w-full" src={recipe.image} alt="Photo of the final result" />
+		<img class="max-w-full" src={recipe.image} alt="the final result of the recipe" />
 		<h1 class="text-2xl md:text-4xl font-bold mt-4 mb-2 md:mb-4">{recipe.title}</h1>
 		<div class="w-full flex flex-wrap space-x-2 mb-8">
 			{#each recipe.tags as tag}

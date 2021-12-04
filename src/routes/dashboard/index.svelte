@@ -11,6 +11,7 @@
 	import { database, auth } from '$lib/supabase';
 	import { onMount } from 'svelte';
 	import RecipeCard from '$lib/components/RecipeCard.svelte';
+	import Welcome from '$lib/components/Welcome.svelte';
 
 	let loading = true;
 	let loadingMore = false;
@@ -40,6 +41,8 @@
 		<section class="absolute top-0 w-screen h-screen grid place-items-center">
 			<Loading />
 		</section>
+	{:else if $userRecipes.length === 0}
+		<Welcome />
 	{:else}
 		<section
 			class="text-gray-600 body-font md:w-full"

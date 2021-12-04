@@ -27,14 +27,13 @@
 				const response = await fetch(
 					`http://api.linkpreview.net/?key=${import.meta.env.VITE_LINK_API_KEY}&q=${url}`,
 					{ mode: 'cors' }
-				);
+				).then();
 				const { title, description, image } = await response.json();
 				await database.post(url, title, description, image, tags.split(', '), null, null, false);
-				goto('/dashboard');
-				loading = false;
 			} catch (error) {
 				$errors.fail = error.message;
 			}
+			goto('/dashboard');
 		}
 	});
 </script>
