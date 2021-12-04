@@ -1,13 +1,7 @@
 <script>
 	import Loading from '$lib/components/Loading.svelte';
 	import FilterByTag from '$lib/components/FilterByTag.svelte';
-	import {
-		currentUser,
-		userRecipes,
-		optionsHidden,
-		filteredBy,
-		totalRecipeCount
-	} from '$lib/store';
+	import { userRecipes, optionsHidden, filteredBy, totalRecipeCount } from '$lib/store';
 	import { database, auth } from '$lib/supabase';
 	import { onMount } from 'svelte';
 	import RecipeCard from '$lib/components/RecipeCard.svelte';

@@ -1,5 +1,5 @@
 <script>
-	import { userRecipes } from '$lib/store';
+	import { userRecipes, totalRecipeCount } from '$lib/store';
 	import { database } from '$lib/supabase';
 	export let title, description, image, tags, url, id, own;
 
@@ -7,6 +7,7 @@
 		try {
 			await database.remove(id);
 			$userRecipes = $userRecipes.filter((recipe) => recipe.id !== id);
+			totalRecipeCount.set($userRecipes.length);
 		} catch (error) {
 			alert(error);
 		}
@@ -15,7 +16,15 @@
 
 <div>
 	<div class="h-full flex flex-col rounded-t-lg overflow-hidden">
-		<img class="h-36 lg:h-48 md:h-36 w-full object-cover object-center" src={image} alt={title} />
+		{#if image}
+			<img class="h-36 lg:h-48 md:h-36 w-full object-cover object-center" src={image} alt={image} />
+		{:else}
+			<img
+				class="h-36 lg:h-48 md:h-36 w-full p-8 border border-opacity-60 border-b-0 object-center"
+				src="fallback.svg"
+				alt="Recipe by Adrien Coquet from NounProject.com"
+			/>
+		{/if}
 		<div
 			class="bg-gray-50 border border-gray-200 border-opacity-60 p-6 flex-grow flex flex-col justify-between"
 		>
