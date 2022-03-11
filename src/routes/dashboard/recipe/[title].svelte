@@ -3,12 +3,15 @@
 	import { onMount } from 'svelte';
 	import { database } from '$lib/supabase';
 	import Loading from '$lib/components/Loading.svelte';
+	import EditRecipe from '$lib/components/EditRecipe.svelte';
 
 	let recipe;
 	let loading = true;
+	let pageMode = $page.params.title;
+	let recipeId = $page.query.get('id');
 
 	onMount(async () => {
-		let data = await database.fetchPost($page.query.get('id'));
+		let data = await database.fetchPost(recipeId);
 		recipe = data[0];
 		loading = false;
 	});
@@ -18,7 +21,7 @@
 	<section class="absolute top-0 w-screen h-screen grid place-items-center">
 		<Loading />
 	</section>
-{:else}
+{:else if pageMode == 'view'}
 	<article class="container max-w-screen-md px-5 pt-4 md:pt-8 pb-12 mx-auto flex flex-col">
 		<img class="max-w-full" src={recipe.image} alt="the final result of the recipe" />
 		<h1 class="text-2xl md:text-4xl font-bold mt-4 mb-2 md:mb-4">{recipe.title}</h1>
@@ -47,4 +50,6 @@
 			{/each}
 		</ol>
 	</article>
+{:else if pageMode == 'edit'}
+	<EditRecipe initialRecipe={recipe} {recipeId} />
 {/if}

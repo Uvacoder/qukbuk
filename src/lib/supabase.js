@@ -150,6 +150,21 @@ const database = (() => {
 		return data, error;
 	};
 
+	const update = async (recipeId, title, description, image, tags, ingredients, directions) => {
+		const { data, error } = await supabase
+			.from('recipes')
+			.update({
+				title: title,
+				image: image,
+				description: description,
+				tags: tags,
+				ingredients: ingredients,
+				directions: directions
+			})
+			.match({ id: recipeId });
+		return data, error;
+	};
+
 	const remove = async (recipeId) => {
 		const { data, error } = await supabase.from('recipes').delete().eq('id', recipeId);
 
@@ -161,6 +176,7 @@ const database = (() => {
 		fetchTags,
 		fetchPost,
 		post,
+		update,
 		remove
 	};
 })();
