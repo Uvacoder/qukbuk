@@ -8,7 +8,7 @@
 	let recipe;
 	let loading = true;
 	let pageMode = $page.params.title;
-	let recipeId = $page.query.get('id');
+	let recipeId = $page.url.searchParams.get('id');
 
 	onMount(async () => {
 		let data = await database.fetchPost(recipeId);

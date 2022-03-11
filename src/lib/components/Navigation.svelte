@@ -17,7 +17,10 @@
 {#if $currentSession}
 	<header bind:clientWidth={w} class="text-gray-600 body-font z-10 border-b-2">
 		<div class="container mx-auto flex p-5 items-center">
-			<a href="/dashboard" class="flex title-font font-medium items-center -ml-2 md:-ml-0 text-gray-900 md:mb-0">
+			<a
+				href="/dashboard"
+				class="flex title-font font-medium items-center -ml-2 md:-ml-0 text-gray-900 md:mb-0"
+			>
 				<svg
 					class="scale-75 md:scale-100"
 					width="59"
@@ -205,7 +208,7 @@
 				<span class="ml-6 text-2xl font-black text-gray-700 hidden md:inline">qukbuk</span>
 			</a>
 			<div class="ml-auto flex items-center">
-				{#if $page.path === '/'}
+				{#if $page.url.pathname === '/'}
 					<a
 						href="/sign-in"
 						class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base md:mt-0"
@@ -222,7 +225,7 @@
 							<path d="M5 12h14M12 5l7 7-7 7" />
 						</svg>
 					</a>
-				{:else if $page.path === '/sign-in'}
+				{:else if $page.url.pathname === '/sign-in'}
 					<a
 						href="/"
 						class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base md:mt-0"
