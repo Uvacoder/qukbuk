@@ -24,7 +24,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@supabase/supabase-js": "^1.31.1",
+		"@supabase/supabase-js": "^1.8.0",
 		"@tailwindcss/line-clamp": "^0.2.2",
 		"encoding": "^0.1.13",
 		"svelte-forms-lib": "^2.0.1",
